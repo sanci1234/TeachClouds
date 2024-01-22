@@ -1,7 +1,12 @@
 import { config } from "@/helpers/config";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import "@/styles/index.scss";
+import BootstrapProvider from "@/helpers/providers/bootstrap-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({
+	subsets: ["latin"],
+	variable: "--font-montserrat",
+});
 
 export const metadata = {
 	title: {
@@ -13,8 +18,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>{children}</body>
+		<html lang="en" className={montserrat.variable}>
+			<body>
+				<BootstrapProvider>{children}</BootstrapProvider>
+			</body>
 		</html>
 	);
 }
