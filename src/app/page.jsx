@@ -1,13 +1,14 @@
+import Slider from "@/components/home/slider";
 import { config } from "@/helpers/config";
 
 export const metadata = {
 	title: config.project.slogan,
 };
 
-export default function Home() {
+export default function HomePage() {
 	return (
-		<div>
-			<div class="alert alert-secondary">Hello</div>
-		</div>
+		<>
+			<Slider />
+		</>
 	);
 }

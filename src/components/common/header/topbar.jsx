@@ -6,10 +6,9 @@ const Topbar = () => {
   return (
     <div className="topbar">
         <div className="container">
-            <div>📢 {config.project.slogan}</div>
+            <div className="slogan">📢 {config.project.slogan}</div>
             <div>Login</div>
-        </div>
-        
+        </div>     
     </div>
   )
 }
