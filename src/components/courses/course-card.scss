@@ -1,0 +1,38 @@
+@use "../../styles/variables" as v ;
+@use "../../styles/mixins" as m ;
+
+.course-card{
+    height: 100%;
+    cursor: pointer;
+   
+
+    .card-title{
+        margin-top: 10px;
+        color: v.$color2;
+    }
+    .card-footer,
+    .card-footer > *{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 3px;
+        color: v.$color1;
+        font-weight: 600;
+        background: none;
+        border-top: none;
+    }
+    .image{
+        overflow: hidden;
+    }
+    img{
+        width: 100%;
+        height: auto;
+        @include m.transition(transform 0.5s)
+    }
+
+    &:hover{
+        img{
+            @include m.transform(scale(1.2) rotate(20deg));
+   }
+    }
+}

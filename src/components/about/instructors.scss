@@ -1,0 +1,16 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+.instructors{
+    h2{
+        background-color: v.$color1;
+        padding: 20px 10px;
+        @include m.border-radius(5px);
+        height: 100%;
+         @include m.flex($jc:center);
+        text-align: center;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+}
+}
