@@ -51,7 +51,7 @@ const DataTable = ({ title, dataSource, dataKey, children }) => {
                     } else if (field) {
                       cellData = row[field];
                     }
-                    return <Cell key={`col-`}>{cellData}</Cell>;
+                    return <Cell >{cellData}</Cell>;
                   })}
                 </Row>
               );
