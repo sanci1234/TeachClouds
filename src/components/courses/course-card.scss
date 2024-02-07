@@ -23,6 +23,12 @@
     }
     .image{
         overflow: hidden;
+        position: relative;
+    }
+    .image::after{
+        @include m.fligran(v.$color1-opacity-50) ;
+        
+
     }
     img{
         width: 100%;

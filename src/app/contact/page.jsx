@@ -1,8 +1,15 @@
+import PageHeader from '@/components/common/page-header'
+import Spacer from '@/components/common/spacer'
+import Contact from '@/components/contact/contact'
 import React from 'react'
 
 const ContactPage = () => {
   return (
-    <div>ContactPage</div>
+    <>
+      <PageHeader title="contact"/>
+      <Spacer height={50} />
+      <Contact/>
+    </>
   )
 }
 
