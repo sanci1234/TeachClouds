@@ -22,6 +22,6 @@ export const createMessageAction = async (prevState, formData) => {
     if (err instanceof Yup.ValidationError) {
       return getYupErrors(err.inner);
     }
-    throw new Error(err);
+    throw err;
   }
 };
