@@ -4,6 +4,7 @@ import "@/styles/index.scss";
 import BootstrapProvider from "@/helpers/providers/bootstrap-provider";
 import Header from "@/components/common/header";
 import Footer from "@/components/common/footer";
+import Mesenger from "@/components/common/misc/mesenger";
 
 const montserrat = Montserrat({
 	subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
 					<Header />
 					<main>{children}</main>
 					<Footer/>
+					<Mesenger/>
 				</BootstrapProvider>
 			</body>
 		</html>

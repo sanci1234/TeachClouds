@@ -5,7 +5,7 @@ import {
     response,
 } from "@/helpers/form-validation";
 import { getGenderValues } from "@/helpers/misc";
-import { createManager, deleteManager, updateManager } from "@/services/manager-service";
+import { createAssistant, deleteAssistant, updateAssistant } from "@/services/assistant-service";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import * as Yup from "yup";
@@ -35,11 +35,11 @@ const FormSchema = Yup.object({
         "Password fields don't match"
     ),
 });
-export const createManagerAction = async (prevState, formData) => {
+export const createAssistantAction = async (prevState, formData) => {
     try {
         const fields = convertFormDataToJson(formData);
         FormSchema.validateSync(fields, { abortEarly: false });
-        const res = await createManager(fields);
+        const res = await createAssistant(fields);
         const data = await res.json();
         if (!res.ok) {
             return response(false, "", data?.validations);
@@ -50,14 +50,14 @@ export const createManagerAction = async (prevState, formData) => {
         }
         throw err;
     }
-    revalidatePath("/dashboard/manager");
-    redirect(`/dashboard/manager?msg=${encodeURI("Manager was created")}`);
+    revalidatePath("/dashboard/assistant-manager");
+    redirect(`/dashboard/assistant-manager?msg=${encodeURI("Assistant was created")}`);
 };
-export const updateManagerAction = async (prevState, formData) => {
+export const updateAssistantAction = async (prevState, formData) => {
     try {
         const fields = convertFormDataToJson(formData);
         FormSchema.validateSync(fields, { abortEarly: false });
-        const res = await updateManager(fields);
+        const res = await updateAssistant(fields);
         const data = await res.json();
         if (!res.ok) {
             return response(false, "", data?.validations);
@@ -68,16 +68,16 @@ export const updateManagerAction = async (prevState, formData) => {
         }
         throw err;
     }
-    revalidatePath("/dashboard/manager");
-    redirect(`/dashboard/manager?msg=${encodeURI("Manager was updated")}`);
+    revalidatePath("/dashboard/assistant-manager");
+    redirect(`/dashboard/assistant-manager?msg=${encodeURI("Assistant was updated")}`);
 };
-export const deleteManagerAction = async (id) => {
+export const deleteAssistantAction = async (id) => {
     if (!id) throw new Error("id is missing");
-    const res = await deleteManager(id);
+    const res = await deleteAssistant(id);
     const data = await res.json();
     if (!res.ok) {
         throw new Error(data.message);
     }
-    revalidatePath("/dashboard/manager");
-    redirect(`/dashboard/manager?msg=${encodeURI("Manager was deleted")}`);
+    revalidatePath("/dashboard/assistant-manager");
+    redirect(`/dashboard/assistant-manager?msg=${encodeURI("Assistant was deleted")}`);
 };

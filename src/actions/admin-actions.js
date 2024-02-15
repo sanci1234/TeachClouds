@@ -4,6 +4,7 @@ import {
   getYupErrors,
   response,
 } from "@/helpers/form-validation";
+import { getGenderValues } from "@/helpers/misc";
 import { createAdmin, deleteAdmin } from "@/services/admin-service";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -11,7 +12,7 @@ import * as Yup from "yup";
 const FormSchema = Yup.object({
   name: Yup.string().required("Required"),
   surname: Yup.string().required("Required"),
-  gender: Yup.string().oneOf(["MALE","FEMALE"],"Invalid gender").required("Required"),
+  gender: Yup.string().oneOf(getGenderValues(),"Invalid gender").required("Required"),
   birthPlace: Yup.string().required("Required"),
   birthDay: Yup.string().required("Required"),
   phoneNumber: Yup.string()
@@ -39,7 +40,7 @@ export const createAdminAction = async (prevState, formData) => {
     const res = await createAdmin(fields);
     const data = await res.json();
     if (!res.ok) {
-      return response(false, "", data?.validations);
+      return response(false, data?.message, data?.validations);
     }
     
   } catch (err) {
@@ -50,15 +51,17 @@ export const createAdminAction = async (prevState, formData) => {
   }
 
   revalidatePath("/dashboard/admin")
-  redirect("/dashboard/admin?success=true")
+  redirect(`/dashboard/admin?msg=${encodeURI("Admin was created")}`);
 };
 
 export const deleteAdminAction = async (id) => {
   if (!id) throw new Error("id is missing");
   const res = await deleteAdmin(id);
-  const data = res.json();
+  //const data = await res.json();
+  //Backend 'den json tipinde olmayan bir mesaj geldiği için hata veriyor.
   if (!res.ok) {
-      throw new Error(data.message);
+      throw new Error("Something went wrong");
   }
   revalidatePath("/dashboard/admin");
+  redirect(`/dashboard/admin?msg=${encodeURI("Admin was deleted")}`);
 };
