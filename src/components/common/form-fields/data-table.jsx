@@ -1,5 +1,6 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 export const Column = ({ title }) => {
   return <th scope="col">{title}</th>;
 };
@@ -80,14 +81,25 @@ const DataTable = ({
   pageNumber,
   pageSize,
   children,
+  selectionMode, //single | multiple | none
+  selection, //update yapılarında önceden seçili olarak gelmesi istenilen elemanların listesi
 }) => {
-  // children korumali bir prop oldugu icin uzerinde degisiklik yapmaya izin vermez
-  // degisiklik yapabilmek icin kopyasini olusturduk
+  const [selectedItem, setSelectedItem] = useState(selection ?? []);
+
   if (!dataSource) throw new Error("dataSource attribute is required");
   if (!Array.isArray(dataSource))
     throw new Error("dataSource value must be an array");
   if (!dataKey) throw new Error("dataKey attribute is required");
+  // children korumali bir prop oldugu icin uzerinde degisiklik yapmaya izin vermez
+  // degisiklik yapabilmek icin kopyasini olusturduk
   const columns = [...children];
+
+  if (!pageSize) pageSize = 0;
+  if (!pageNumber) pageNumber = 0;
+
+  if (selectionMode && selectionMode !== "none") {
+    columns.splice(1, 0, <Column selectionMode={selectionMode} />);
+  }
   return (
     <div className="card">
       <div className="card-body">
@@ -114,14 +126,17 @@ const DataTable = ({
                       let cellData = "";
                       if (index) {
                         cellData = pageSize * pageNumber + indexRow + 1;
+                      } else if (selectionMode && selectionMode !== "none") {
+                        cellData =
+                          selection === "single" ? "Single" : "multiple";
                       } else if (field) {
                         cellData = row[field];
                       } else if (template) {
                         console.log(typeof template);
-                        if(typeof template !== "function"){
-                          throw new Error("template prop must be a function")
+                        if (typeof template !== "function") {
+                          throw new Error("template prop must be a function");
                         }
-                        cellData = template(row)
+                        cellData = template(row);
                       }
                       return (
                         <Cell key={`col-${row[dataKey]}-${title}`}>

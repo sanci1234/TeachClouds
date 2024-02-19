@@ -12,6 +12,12 @@ export const getAllTermsByPage = async (
     headers: await getAuthHeader(),
   });
 };
+
+export const getAllTerms = async () => {
+  return fetch(`${API_URL}/educationTerms/getAll`, {
+    headers: await getAuthHeader(),
+  });
+};
 export const getTermById = async (id) => {
   return fetch(`${API_URL}/educationTerms/${id}`, {
     headers: await getAuthHeader(),
@@ -30,4 +36,3 @@ export const createTerm = async (payload) => {
     body: JSON.stringify(payload),
   });
 };
-

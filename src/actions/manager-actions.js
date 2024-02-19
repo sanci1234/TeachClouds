@@ -42,7 +42,7 @@ export const createManagerAction = async (prevState, formData) => {
         const res = await createManager(fields);
         const data = await res.json();
         if (!res.ok) {
-            return response(false, "", data?.validations);
+            return response(false, data?.message, data?.validations);
         }
     } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -60,7 +60,7 @@ export const updateManagerAction = async (prevState, formData) => {
         const res = await updateManager(fields);
         const data = await res.json();
         if (!res.ok) {
-            return response(false, "", data?.validations);
+            return response(false, data?.message, data?.validations);
         }
     } catch (err) {
         if (err instanceof Yup.ValidationError) {

@@ -14,6 +14,9 @@ const NewManagerForm = () => {
       <div className="card">
         <div className="card-body">
           <div className="card-title">New</div>
+          {state?.message ? (
+            <div className="alert alert-danger">{state.message}</div>
+          ) : null}
           <form action={dispatch} noValidate>
             <div className="row row-cols-1  row-cols-md-2 row-cols-xl-3">
               <div className="col">
@@ -54,7 +57,12 @@ const NewManagerForm = () => {
                     name="gender"
                   >
                     <option value="">Select</option>
-                    {config.genders.map((item)=>( <option value={item.value} key={item.value} > {item.label} </option>))}
+                    {config.genders.map((item) => (
+                      <option value={item.value} key={item.value}>
+                        {" "}
+                        {item.label}{" "}
+                      </option>
+                    ))}
                   </select>
 
                   <label htmlFor="gender">Gender</label>
@@ -115,18 +123,14 @@ const NewManagerForm = () => {
               <div className="col">
                 <div className="form-floating mb-3">
                   <InputMask
-                    className={`form-control ${isInvalid(
-                      state.errors?.ssn
-                    )}`}
+                    className={`form-control ${isInvalid(state.errors?.ssn)}`}
                     id="ssn"
                     name="ssn"
                     placeholder="SSN"
                     mask="999-99-9999"
                   />
                   <label htmlFor="ssn">SSN</label>
-                  <div className="invalid-feedback">
-                    {state.errors?.ssn}
-                  </div>
+                  <div className="invalid-feedback">{state.errors?.ssn}</div>
                 </div>
               </div>
               <div className="col">
@@ -181,10 +185,10 @@ const NewManagerForm = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="d-flex align-items-center justify-content-center gap-4 ">
-                <CancelButton />
-                <SubmitButton title="Create" />
+              <CancelButton />
+              <SubmitButton title="Create" />
             </div>
           </form>
         </div>

@@ -7,13 +7,16 @@ import { initialResponse, isInvalid } from "@/helpers/form-validation";
 import { useFormState } from "react-dom";
 import InputMask from "react-input-mask-next";
 
-const EditManagerForm = ({data}) => {
+const EditManagerForm = ({ data }) => {
   const [state, dispatch] = useFormState(updateManagerAction, initialResponse);
   return (
     <div className="container ">
       <div className="card">
         <div className="card-body">
           <div className="card-title">Edit Form</div>
+          {state?.message ? (
+            <div className="alert alert-danger">{state.message}</div>
+          ) : null}
           <form action={dispatch} noValidate>
             <input type="hidden" name="userId" value={data.userId} />
             <div className="row row-cols-1  row-cols-md-2 row-cols-xl-3">
@@ -58,7 +61,12 @@ const EditManagerForm = ({data}) => {
                     defaultValue={data.gender}
                   >
                     <option value="">Select</option>
-                    {config.genders.map((item)=>( <option value={item.value} key={item.value} > {item.label} </option>))}
+                    {config.genders.map((item) => (
+                      <option value={item.value} key={item.value}>
+                        {" "}
+                        {item.label}{" "}
+                      </option>
+                    ))}
                   </select>
 
                   <label htmlFor="gender">Gender</label>
@@ -122,9 +130,7 @@ const EditManagerForm = ({data}) => {
               <div className="col">
                 <div className="form-floating mb-3">
                   <InputMask
-                    className={`form-control ${isInvalid(
-                      state.errors?.ssn
-                    )}`}
+                    className={`form-control ${isInvalid(state.errors?.ssn)}`}
                     id="ssn"
                     name="ssn"
                     placeholder="SSN"
@@ -132,9 +138,7 @@ const EditManagerForm = ({data}) => {
                     defaultValue={data.ssn}
                   />
                   <label htmlFor="ssn">SSN</label>
-                  <div className="invalid-feedback">
-                    {state.errors?.ssn}
-                  </div>
+                  <div className="invalid-feedback">{state.errors?.ssn}</div>
                 </div>
               </div>
               <div className="col">
@@ -190,10 +194,10 @@ const EditManagerForm = ({data}) => {
                 </div>
               </div>
             </div>
-            
+
             <div className="d-flex align-items-center justify-content-center gap-4 ">
-                <CancelButton />
-                <SubmitButton title="Update" />
+              <CancelButton />
+              <SubmitButton title="Update" />
             </div>
           </form>
         </div>

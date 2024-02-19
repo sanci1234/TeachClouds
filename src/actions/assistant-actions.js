@@ -42,7 +42,7 @@ export const createAssistantAction = async (prevState, formData) => {
         const res = await createAssistant(fields);
         const data = await res.json();
         if (!res.ok) {
-            return response(false, "", data?.validations);
+            return response(false, data?.message, data?.validations);
         }
     } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -60,7 +60,7 @@ export const updateAssistantAction = async (prevState, formData) => {
         const res = await updateAssistant(fields);
         const data = await res.json();
         if (!res.ok) {
-            return response(false, "", data?.validations);
+            return response(false, data?.message, data?.validations);
         }
     } catch (err) {
         if (err instanceof Yup.ValidationError) {
