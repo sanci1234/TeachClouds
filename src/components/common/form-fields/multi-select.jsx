@@ -21,6 +21,13 @@ const MultiSelect = ({
     }
     setList(arr);
   };
+  const isChecked = (id) => {
+    if(!values || !Array.isArray(values) || values.length <= 0 ) {
+      return false;
+    }
+    return values.includes(id.toString());
+      
+  }
   return (
     <>
       <input name={id} type="hidden" value={JSON.stringify(list)} />
@@ -57,6 +64,7 @@ const MultiSelect = ({
                     style={{ cursor: "pointer" }}
                     defaultValue={item[optionValue]}
                     onChange={handleChange}
+                    defaultChecked={isChecked(item[optionValue])}
                   />
                   <label
                     className="form-check-label w-100"

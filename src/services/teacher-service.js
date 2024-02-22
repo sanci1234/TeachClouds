@@ -17,6 +17,11 @@ export const getAllTeachers = async () => {
     headers: await getAuthHeader(),
   });
 };
+export const getAllAdvisorTeachers = async () => {
+	return fetch(`${API_URL}/advisorTeacher/getAll`, {
+		headers: await getAuthHeader(),
+	});
+};
 export const getTeacherById = async (id) => {
   return fetch(`${API_URL}/teachers/getSavedTeacherById/${id}`, {
     headers: await getAuthHeader(),
