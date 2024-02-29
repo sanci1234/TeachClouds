@@ -8,7 +8,7 @@ const UserMenu = async() => {
     console.log("DATA:",session);
   return (
     <div>
-        {session?.user ? <UserMenuAuth session={session} />  :<UserMenuGuest/>}
+        {session?.user?.role ? <UserMenuAuth session={session} />  :<UserMenuGuest/>}
     </div>
   )
 }

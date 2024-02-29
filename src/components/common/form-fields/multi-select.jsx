@@ -28,6 +28,8 @@ const MultiSelect = ({
     return values.includes(id.toString());
       
   }
+  
+
   return (
     <>
       <input name={id} type="hidden" value={JSON.stringify(list)} />

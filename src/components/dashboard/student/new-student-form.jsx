@@ -56,9 +56,9 @@ const NewStudentForm = ({ advisorTeachers }) => {
                     name="gender"
                   >
                     <option value="">Select</option>
-                    {config.genders.map((item) => (
-                      <option value={item.value} key={item.value}>
-                        {item.label}
+                    {advisorTeachers.map((item) => (
+                      <option value={item.advisorTeacherId} key={item.advisorTeacherId}>
+                        {item.teacherName} {item.teacherSurname}
                       </option>
                     ))}
                   </select>

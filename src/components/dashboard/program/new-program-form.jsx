@@ -6,19 +6,12 @@ import SubmitButton from "@/components/common/form-fields/submit-button";
 import { config } from "@/helpers/config";
 import { formatDateYYYYMMM } from "@/helpers/date-time";
 import { initialResponse, isInvalid } from "@/helpers/form-validation";
+import { getTermTitle } from "@/helpers/misc";
 import { useFormState } from "react-dom";
 const NewProgramForm = ({ terms, lessons }) => {
   const [state, dispatch] = useFormState(createProgramAction, initialResponse);
 
-  const getTermTitle = (item) => {
-    const termItem = config.educationTerms.find(
-      (term) => term.value === item.term
-    );
-
-    const time = formatDateYYYYMMM(item.startDate);
-
-    return `${termItem.label} ${time}`;
-  };
+ 
 
   return (
     <div className="container ">
